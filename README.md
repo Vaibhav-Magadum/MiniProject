@@ -1,6 +1,6 @@
-# Solution to Traffic Problem in Congested Area
+# Smart Traffic System
 
-This repository contains the code and documentation for a project aimed at addressing traffic congestion in congested urban areas by applying an AI-based solution to traffic light control. The project aims to optimize traffic flow, reduce congestion, and minimize travel time through adaptive traffic signal control.
+This repository contains the code and documentation for a project aimed at addressing traffic congestion in urban areas by applying an density based solution to traffic light control. The project aims to optimize traffic flow, reduce congestion, and minimize travel time through adaptive traffic signal control.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ This repository contains the code and documentation for a project aimed at addre
 
 The number of vehicles on the road is increasing day by day, making it crucial to manage traffic flow efficiently to utilize existing road capacity effectively. This project focuses on developing a smart traffic management system that optimizes traffic flow, reduces congestion, and minimizes travel time using AI-based techniques.
 
-## Motivation 🌟
+## Motivation
 
 The motivation behind embarking on this project is multi-faceted, stemming from both personal and societal aspirations. As technology continues to shape our world, it becomes imperative to leverage its power to address pressing urban challenges like traffic congestion. Here are some key reasons driving our enthusiasm for this project:
 
