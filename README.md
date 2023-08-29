@@ -71,8 +71,8 @@ The project's expected outcomes include:
 
 ## Contributors
 
-- SUVAN BANERJEE (1DS22IS168)
 - Anagha R (1DS22IS017)
+- Suvan Banerjee (1DS22IS168)
 - Vaibhav S Magdum (1DS22IS177)
 - Vedant Rajendra Balpande (1DS22IS181)
 
