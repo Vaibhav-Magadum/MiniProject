@@ -1,0 +1,59 @@
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#FFFFFF',
+      'primaryTextColor': '#000000',
+      'primaryBorderColor': '#000000',
+      'lineColor': '#000000',
+      'secondaryColor': '#FFFFFF',
+      'tertiaryColor': '#FFFFFF'
+    }
+  }
+}%%
+
+graph TD
+    A --> I{Video Capture Successful?}
+    I -- Yes --> J[Read Frame]
+    I -- No --> X[End]
+    J --> K{End of Video?}
+    K -- No --> L[Resize Frame]
+    K -- Yes --> X
+    L --> M[Predict using YOLO]
+    M --> N{Boxes Found?}
+    N -- Yes --> O[Extract Relevant Boxes]
+    N -- No --> J
+    O --> P[Update Tracker]
+    P --> Q{Bboxes Found?}
+    Q -- Yes --> R[Update Frame with IDs]
+    Q -- No --> J
+    R --> S[Display Frame]
+    S --> K
+    X --> Y[Release Video Capture]
+    Y --> Z[Close All Windows]
+
+
+
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#FFFFFF',
+      'primaryTextColor': '#000000',
+      'primaryBorderColor': '#000000',
+      'lineColor': '#000000',
+      'secondaryColor': '#FFFFFF',
+      'tertiaryColor': '#FFFFFF'
+    }
+  }
+}%%
+
+graph TD
+ A[Start] --> B[Import Libraries]
+    B --> C[Initialize YOLO Model]
+    C --> D[Define RGB Function]
+    D --> E[Open Video Capture]
+    E --> F[Read Class List from File]
+    F --> G[Initialize Tracker]
+    G --> H[Set Initial Values for cy1, cy2, offset]
+    H --> Z[A]
