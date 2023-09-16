@@ -1,0 +1,149 @@
+\documentclass{article}
+\usepackage[]{algorithm2e}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{algorithm}[H]
+ \KwData{Video stream from webcam}
+ \KwResult{Real-time vehicle detection and tracking}
+  \BlankLine
+ \BlankLine
+ Initialize YOLO model with 'yolov8s.pt'\;
+ Initialize object tracker\;
+ Open the video capture stream from the default camera\;
+ Read class information from "coco.txt" file\;
+ 
+ \While{true}{
+    Read a frame from the video stream\;
+    Resize the frame to (480, 360)\;
+    
+    Use YOLO to detect objects in the frame\;
+    Extract detected object coordinates and classes\;
+    
+    \For{each detected object}{
+        \If{Class is 'car', 'bus', 'motorcycle', or 'truck'}{
+            Add object coordinates to the list of vehicles\;
+        }
+    }
+    
+    Update the object tracker with the list of vehicle coordinates\;
+    
+    \For{each tracked vehicle}{
+        Calculate the center (cx, cy) of the bounding box\;
+        Draw a circle at (cx, cy) to mark the vehicle\;
+        Add a label "Vehicle" near the circle\;
+    }
+    
+    Display the processed frame in a window\;
+    
+    \If{Esc key is pressed}{
+        Terminate the loop\;
+    }
+ }
+ 
+ Release the video capture stream\;
+ Close all OpenCV windows\;
+ \BlankLine
+ \BlankLine
+ 
+ \caption{Real-time Vehicle Detection and Tracking}
+\end{algorithm}
+
+  \BlankLine
+ \BlankLine
+\begin{algorithm}
+\KwData{Arduino board and pins for red, yellow, and green lights}
+\KwResult{Traffic light control algorithm}
+ \BlankLine
+\BlankLine
+\SetAlgoNlRelativeSize{0}
+\SetNlSty{textbf}{(}{)}
+\SetAlgoNlRelativeSize{-1}
+\While{true}{
+    Initialization\;
+    RedToGreen with a specified wait time (e.g., 5 seconds)\;
+    GreenToRed with a specified wait time (e.g., 5 seconds)\;
+}
+ \BlankLine
+ \BlankLine
+\caption{Traffic Light Control Algorithm}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+ \KwData{Video stream, YOLO model, class info, and tracking parameters}
+ \KwResult{Real-time vehicle detection and tracking}
+  \BlankLine
+ \BlankLine
+ Initialize YOLO and object tracker\;
+ Open video stream and read class info\;
+ 
+ \While{true}{
+    Read and resize a frame\;
+    Detect and classify objects in the frame\;
+    
+    Initialize lists for tracking and counters\;
+    
+    \For{each detected car}{
+        Add it to the tracking list\;
+    }
+    
+    Update the object tracker\;
+    
+    \For{each tracked car}{
+        Calculate its center and draw a rectangle\;
+        
+        Track speed and display it\;
+    }
+    
+    Draw tracking lines and count vehicles\;
+    Display counts on the frame\;
+    
+    Show the frame and check for termination\;
+ }
+ 
+ Release resources and close windows\;
+\BlankLine
+ \BlankLine
+ \caption{Real-time Vehicle Detection and Tracking}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \KwData{Traffic density data from YOLO, FTP connection parameters, and traffic management logic}
+ \KwResult{Real-time traffic management based on density data}
+  \BlankLine
+ \BlankLine
+ Initialize YOLO for vehicle detection and density calculation\;
+ Initialize FTP connection parameters for data transfer\;
+ 
+ \While{true}{
+    Detect and calculate traffic density using YOLO\;
+    
+    \If{Traffic density data changes}{
+        Transmit updated density data to the remote computer via FTP\;
+    }
+    
+    \If{Receiving computer detects new density data}{
+        Receive the data via FTP\;
+        
+        Parse the received data to extract traffic density information\;
+        
+        Implement traffic management logic based on the density data\;
+    }
+    
+    Execute traffic management actions, such as signal control or road closures\;
+    
+    Monitor and adapt to changing traffic conditions\;
+    
+    \If{Termination condition is met}{
+        Terminate the loop\;
+    }
+ }
+ 
+ Close FTP connection and release resources\;
+  \BlankLine
+
+ \caption{Real-time Traffic Management based on Density Data}
+\end{algorithm}
+\end{document}
