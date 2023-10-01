@@ -7,10 +7,10 @@ import time
 
 
 # FTP server details
-ftp_host = '192.168.214.74'
+ftp_host = '192.168.42.89'
 ftp_port = 2221
-ftp_user = 'admin'
-ftp_password = 'admin'
+ftp_user = 'android'
+ftp_password = 'android'
 
 #Connect to FTP server
 ftp = FTP()
@@ -44,7 +44,7 @@ while True:
         continue
     frame=cv2.resize(frame,(360,480))
     results=model.predict(frame)
-    a=results[0].boxes.boxes
+    a=results[0].boxes.data
     px=pd.DataFrame(a).astype("float")
     list=[]   
     for index,row in px.iterrows():
@@ -69,7 +69,7 @@ while True:
     file_content = str(density)+", "
     with open('signal_1.txt', 'wb') as local_file:
         local_file.write(file_content.encode('utf-8'))
-    with open('signal_1', 'rb') as local_file:
+    with open('signal_1.txt', 'rb') as local_file:
         ftp.storbinary('STOR signal_1.txt', local_file)
 
     cv2.imshow("RGB", frame)

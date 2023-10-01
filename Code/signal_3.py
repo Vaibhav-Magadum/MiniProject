@@ -44,7 +44,7 @@ while True:
         continue
     frame=cv2.resize(frame,(360,480))
     results=model.predict(frame)
-    a=results[0].boxes.boxes
+    a=results[0].boxes.data
     px=pd.DataFrame(a).astype("float")
     list=[]   
     for index,row in px.iterrows():
@@ -69,7 +69,7 @@ while True:
     file_content = str(density)+", "
     with open('signal_3.txt', 'wb') as local_file:
         local_file.write(file_content.encode('utf-8'))
-    with open('signal_3', 'rb') as local_file:
+    with open('signal_3.txt', 'rb') as local_file:
         ftp.storbinary('STOR signal_3.txt', local_file)
 
     cv2.imshow("RGB", frame)
