@@ -19,7 +19,7 @@ def RGB(event, x, y, flags, param):
 cv2.namedWindow('RGB')
 cv2.setMouseCallback('RGB', RGB)
 
-cap=cv2.VideoCapture('veh2.mp4')
+cap=cv2.VideoCapture('veh2_.mp4')
 
 
 my_file = open("coco.txt", "r")
@@ -31,8 +31,8 @@ count=0
 
 tracker=Tracker()
 
-cy1=322
-cy2=368
+cy1=0
+cy2=0
 
 offset=6
 
@@ -50,7 +50,7 @@ while True:
     count += 1
     if count % 3 != 0:
         continue
-    frame=cv2.resize(frame,(1020,500))
+    frame=cv2.resize(frame,(360,480))
    
 
     results=model.predict(frame)

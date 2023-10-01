@@ -2,7 +2,20 @@ import cv2,os
 import pandas as pd
 from ultralytics import YOLO
 from tracker import*
+from ftplib import FTP
 import time
+
+
+# FTP server details
+ftp_host = '192.168.214.74'
+ftp_port = 2221
+ftp_user = 'admin'
+ftp_password = 'admin'
+
+#Connect to FTP server
+ftp = FTP()
+ftp.connect(ftp_host, ftp_port)
+ftp.login(ftp_user, ftp_password)
 
 model=YOLO('yolov8s.pt')
 def RGB(event, x, y, flags, param):
@@ -18,16 +31,11 @@ count=0
 tracker=Tracker()
 cy1=0
 cy2=0
-offset=6
-time_prev=time.time()
-while True: 
-    with open('signal_1.txt', 'r') as signal1:
-         signal_1_density,signal_1_speed=map(int,str(signal1.read).split())
-    with open('signal_2.txt', 'r') as signal2:
-         signal_2_density,signal_3_speed=map(int,str(signal2.read).split()) 
-    with open('signal_1.txt', 'r') as signal3:
-         signal_3_density,signal_3_speed=map(int,str(signal3.read).split())  
 
+offset=6
+
+
+while True:   
     ret,frame = cap.read()
     if not ret:
         break
@@ -38,7 +46,7 @@ while True:
     results=model.predict(frame)
     a=results[0].boxes.boxes
     px=pd.DataFrame(a).astype("float")
-    list=[]    
+    list=[]   
     for index,row in px.iterrows():
         x1=int(row[0])
         y1=int(row[1])
@@ -56,9 +64,17 @@ while True:
         cy=int((y3+y4)//2)+2
         cv2.circle(frame,(cx,cy),4,(0,0,255),-1)
         cv2.putText(frame,str("Vehicle"),(cx,cy),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
-    print(len(list))
+    density=len(list)
+
+    file_content = str(density)+", "
+    with open('signal_3.txt', 'wb') as local_file:
+        local_file.write(file_content.encode('utf-8'))
+    with open('signal_3', 'rb') as local_file:
+        ftp.storbinary('STOR signal_3.txt', local_file)
+
     cv2.imshow("RGB", frame)
     if cv2.waitKey(1)&0xFF==27:
         break
+ftp.quit()
 cap.release()
 cv2.destroyAllWindows()
