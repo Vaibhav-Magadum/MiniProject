@@ -1,0 +1,4 @@
+numpy==1.24.4
+pandas==2.1.1
+pyfirmata==1.1.0
+ultralytics==8.0.194
