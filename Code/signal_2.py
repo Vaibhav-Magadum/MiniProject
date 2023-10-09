@@ -66,11 +66,16 @@ while True:
         cv2.putText(frame,str("Vehicle"),(cx,cy),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
     density=len(list)
 
-    file_content = str(density)+", "
+     file_content = str(density)
+    file_log = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " " + str(density) + "\n"
     with open('signal_2.txt', 'wb') as local_file:
         local_file.write(file_content.encode('utf-8'))
     with open('signal_2.txt', 'rb') as local_file:
         ftp.storbinary('STOR signal_2.txt', local_file)
+    with open('signal_2_log.txt', 'ab') as local_file2:
+        local_file2.write(file_log.encode('utf-8'))
+    with open('signal_2_log.txt', 'rb') as local_file2:
+        ftp.storbinary('STOR signal_2_log.txt', local_file2)
 
     cv2.imshow("RGB", frame)
     if cv2.waitKey(1)&0xFF==27:
