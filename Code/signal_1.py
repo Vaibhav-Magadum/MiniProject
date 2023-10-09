@@ -7,10 +7,10 @@ import time
 
 
 # FTP server details
-ftp_host = '192.168.42.89'
+ftp_host = '192.168.214.74'
 ftp_port = 2221
-ftp_user = 'android'
-ftp_password = 'android'
+ftp_user = 'admin'
+ftp_password = 'admin'
 
 #Connect to FTP server
 ftp = FTP()
@@ -66,11 +66,16 @@ while True:
         cv2.putText(frame,str("Vehicle"),(cx,cy),cv2.FONT_HERSHEY_COMPLEX,0.8,(0,255,255),2)
     density=len(list)
 
-    file_content = str(density)+", "
+    file_content = str(density)
+    file_log = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())) + " " + str(density) + "\n"
     with open('signal_1.txt', 'wb') as local_file:
         local_file.write(file_content.encode('utf-8'))
     with open('signal_1.txt', 'rb') as local_file:
         ftp.storbinary('STOR signal_1.txt', local_file)
+    with open('signal_1_log.txt', 'ab') as local_file2:
+        local_file2.write(file_log.encode('utf-8'))
+    with open('signal_1_log.txt', 'rb') as local_file2:
+        ftp.storbinary('STOR signal_1_log.txt', local_file2)
 
     cv2.imshow("RGB", frame)
     if cv2.waitKey(1)&0xFF==27:
